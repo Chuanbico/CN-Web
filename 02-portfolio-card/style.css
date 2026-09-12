@@ -1,0 +1,250 @@
+/* ============================================================
+   Portfolio Card — Bài tập 1 (CN Web)
+   Màu chủ đạo: navy (#0a192f) + accent mint (#64ffda)
+   ============================================================ */
+
+:root {
+  --navy-900: #0a192f;
+  --navy-700: #112a4a;
+  --navy-500: #1b3a6b;
+  --accent:   #64ffda;
+  --text:     #17233a;
+  --muted:    #5b6780;
+  --line:     #e3e8f0;
+  --card-bg:  #ffffff;
+  --radius:   20px;
+  --shadow:   0 18px 40px rgba(10, 25, 47, 0.18);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  /* min-height thay cho height: nội dung dài vẫn cuộn được trên mobile */
+  min-height: 100vh;
+  padding: 24px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(160deg, #0a192f 0%, #17335c 55%, #0a192f 100%);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--text);
+  line-height: 1.55;
+}
+
+/* ---------- Khung card ---------- */
+.card {
+  width: 100%;
+  max-width: 420px;      /* dùng max-width thay width cố định để co giãn được */
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* ---------- Banner + ảnh đại diện ---------- */
+.card__banner {
+  height: 104px;
+  background: linear-gradient(120deg, var(--navy-900), var(--navy-500));
+  position: relative;
+}
+
+.card__avatar {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid var(--card-bg);
+  background: var(--navy-900);
+  /* Đặt ảnh đè lên ranh giới banner/thân card */
+  position: absolute;
+  left: 50%;
+  bottom: -64px;
+  transform: translateX(-50%);
+  box-shadow: 0 8px 20px rgba(10, 25, 47, 0.25);
+}
+
+/* ---------- Thân card ---------- */
+.card__body {
+  padding: 78px 26px 28px;   /* chừa chỗ cho nửa dưới của avatar */
+  text-align: center;
+}
+
+.card__name {
+  margin: 0;
+  font-size: clamp(1.25rem, 5.2vw, 1.6rem);  /* co chữ theo bề rộng màn hình */
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--navy-900);
+}
+
+.card__role {
+  margin: 6px 0 0;
+  font-weight: 600;
+  color: var(--navy-500);
+}
+
+.card__at {
+  display: inline-block;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.card__major {
+  margin: 10px 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.card__location {
+  margin: 8px 0 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.card__bio {
+  margin: 16px 0 0;
+  font-size: 0.9rem;
+  color: var(--text);
+  text-align: left;
+  padding: 14px 16px;
+  background: #f6f8fc;
+  border-left: 3px solid var(--accent);
+  border-radius: 10px;
+}
+
+.card__heading {
+  margin: 22px 0 10px;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+/* ---------- Badge kỹ năng ---------- */
+.skills {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;         /* tự xuống dòng khi màn hình hẹp */
+  justify-content: center;
+  gap: 8px;
+}
+
+.badge {
+  padding: 6px 13px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: var(--navy-900);
+  color: #ffffff;
+}
+
+.badge--ghost {
+  background: #eef2f8;
+  color: var(--navy-700);
+}
+
+/* ---------- Mạng xã hội ---------- */
+.socials {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);   /* 2 cột: dễ bấm bằng ngón tay */
+  gap: 10px;
+}
+
+.social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;              /* vùng chạm tối thiểu 44px trên mobile */
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 0.87rem;
+  font-weight: 600;
+  color: var(--navy-900);
+  background: #ffffff;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.social:hover,
+.social:focus-visible {
+  background: var(--navy-900);
+  border-color: var(--navy-900);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.icon {
+  width: 17px;
+  height: 17px;
+  flex: none;
+  fill: currentColor;
+}
+
+/* ---------- Nút kêu gọi hành động ---------- */
+.cta {
+  display: block;
+  margin-top: 16px;
+  padding: 13px 18px;
+  border-radius: 12px;
+  background: var(--navy-900);
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition: background 0.18s ease;
+}
+
+.cta:hover,
+.cta:focus-visible {
+  background: var(--navy-700);
+}
+
+/* Viền focus rõ ràng khi dùng bàn phím (Tab) */
+a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+/* Màn hình điện thoại nhỏ (< 400px) */
+@media (max-width: 400px) {
+  body { padding: 12px 10px; }
+
+  .card__body { padding: 68px 18px 22px; }
+
+  .card__avatar {
+    width: 108px;
+    height: 108px;
+    bottom: -54px;
+  }
+
+  .social { font-size: 0.82rem; }
+}
+
+/* Màn hình siêu hẹp (< 330px): xếp mạng xã hội thành 1 cột */
+@media (max-width: 330px) {
+  .socials { grid-template-columns: 1fr; }
+}
+
+/* Màn hình rộng: cho card to hơn một chút */
+@media (min-width: 768px) {
+  .card { max-width: 460px; }
+}
+
+/* Người dùng bật "giảm chuyển động" thì tắt hiệu ứng */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

@@ -1,0 +1,73 @@
+Bài tập gồm ba phần: Exercise 1, Exercise 2, Exercise 3.
+
+===============================
+EXERCISE 1 — Tên miền & Git/GitHub
+===============================
+- Đăng ký một tên miền miễn phí.
+  (Tham khảo chương trình tên miền .id.vn miễn phí của P.A Việt Nam hoặc Mắt Bão)
+- Tìm hiểu Git và GitHub qua:
+  + Tài liệu hướng dẫn của CodeLearn
+  + GitHub Docs
+
+===============================
+EXERCISE 2 — Portfolio Card (trang giới thiệu cá nhân)
+===============================
+Mục tiêu:
+- Xây dựng một trang giới thiệu cá nhân dạng card (Portfolio Card) để chia sẻ
+  trên mạng xã hội hoặc gửi kèm CV.
+
+Nội dung bắt buộc:
+- Ảnh đại diện
+- Tên
+- Ngành học
+- Kỹ năng
+- Liên kết mạng xã hội
+
+Yêu cầu kỹ thuật:
+- Responsive cơ bản, hiển thị tốt trên cả desktop và mobile.
+
+Prompt khởi đầu gợi ý:
+- Tạo trang HTML + CSS gồm:
+  + Ảnh đại diện hình tròn
+  + Tên
+  + Chuyên ngành
+  + 3 kỹ năng dạng badge
+  + 2 icon mạng xã hội
+  + Màu chủ đạo: xanh navy
+
+===============================
+EXERCISE 3 — Landing Page sản phẩm/dịch vụ
+===============================
+Mục tiêu:
+- Xây dựng một landing page một trang (one-page) cho sản phẩm/dịch vụ tự chọn.
+  Ví dụ: ứng dụng học tiếng Anh, dịch vụ giao đồ ăn, cửa hàng thời trang nhỏ.
+
+Yêu cầu kỹ thuật:
+- Responsive cơ bản, hiển thị tốt trên cả desktop và mobile.
+
+Yêu cầu về quy trình prompt (bắt buộc ít nhất 3 vòng lặp, mỗi vòng một mục đích riêng):
+1. Vòng 1: Tạo khung cấu trúc HTML tổng thể.
+2. Vòng 2: Yêu cầu AI thiết kế CSS theo một phong cách cụ thể.
+3. Vòng 3: Tinh chỉnh spacing, typography và hiệu ứng.
+
+Yêu cầu so sánh công cụ AI:
+- So sánh ít nhất 2 công cụ AI khác nhau cho cùng một prompt
+  (ví dụ: Claude vs ChatGPT, hoặc Claude vs Gemini).
+- Nhận xét sự khác biệt giữa kết quả của các công cụ.
+
+===============================
+YÊU CẦU NỘP BÀI CHUNG (Exercise 2 & 3)
+===============================
+Cả Exercise 2 và Exercise 3 đều phải nộp:
+
+1. Mã nguồn kết quả (source code).
+
+2. "Nhật ký Vibe coding" (AI Log) — mô tả các bước tương tác theo trình tự:
+   prompt → kết quả → chỉnh sửa → lý giải
+
+   Mỗi bước cần ghi lại:
+   - Prompt ban đầu: câu lệnh đầu tiên gửi cho AI
+   - Kết quả nhận được: mô tả ngắn, kèm screenshot hoặc paste code
+   - Vấn đề phát sinh: điều gì chưa đúng/chưa đẹp
+   - Prompt tinh chỉnh: câu lệnh chỉnh sửa tiếp theo
+   - Thay đổi thủ công: phần nào tự sửa và lý do
