@@ -8,10 +8,10 @@
 | Vòng | Chủ đích | Trạng thái |
 |------|----------|------------|
 | 1 | Khung cấu trúc HTML | Xong |
-| 2 | Styling & màu sắc | Chưa chạy |
+| 2 | Styling & màu sắc | Xong |
 | 3 | Chi tiết & polish | Chưa chạy |
 
-Link hội thoại gốc: https://share.gemini.google/pbCE91P7SEJf
+Link hội thoại gốc: https://share.gemini.google/QU1K7gfFAIaZ
 
 ---
 
@@ -70,7 +70,56 @@ Chưa sửa gì — giữ nguyên đúng những gì Gemini trả về để ph�
 
 ## VÒNG 2 — Styling & màu sắc
 
-_(Chưa chạy)_
+### Prompt tinh chỉnh
+
+Giống hệt prompt đã gửi Claude (xem [`../PROMPTS.md`](../PROMPTS.md) — Vòng 2).
+
+### Kết quả nhận được
+
+Một khối CSS ~700 dòng, chia 13 mục có đánh số và tiêu đề rõ ràng.
+
+- **Bảng màu bám đúng yêu cầu** và khai báo đầy đủ thành biến CSS: `--bg-night`,
+  `--accent-teal`, `--warning-amber`, kèm cả biến "glow" bán trong suốt
+  (`--accent-teal-glow`) để dùng cho đổ bóng phát sáng.
+- **Nhịp sáng–tối xen kẽ** đúng như prompt: header/hero tối → thanh logo sáng →
+  tính năng sáng → cách hoạt động trắng → số liệu tối → bảng giá sáng → đánh giá
+  trắng → hỏi đáp sáng → form CTA tối → footer tối nhất (`#060a12`).
+- **Lưới dùng `repeat(auto-fit, minmax(260px, 1fr))`** cho cả 4 khu vực. Cách này
+  tự đổi số cột theo bề rộng mà **không cần media query** — linh hoạt hơn cách
+  Claude làm (cố định 4 cột rồi ghi đè qua 2 media query).
+- **Hai điểm nhấn thị giác tự nghĩ thêm**: `radial-gradient` toả từ giữa cho hero
+  và form CTA (mô phỏng ánh đèn táp-lô trong khoang lái ban đêm), và chấm tròn
+  teal phát sáng đặt trước chữ "DriveGuard" bằng `::before`.
+- Thẻ gói giữa được làm nổi bằng `transform: scale(1.02)` + viền teal + quầng sáng.
+
+### Kết quả giao diện
+
+Desktop 1280px:
+
+![Vòng 2 — Gemini, desktop](screenshots/round2-desktop.png)
+
+Mobile 390px:
+
+![Vòng 2 — Gemini, mobile](screenshots/round2-mobile.png)
+
+### Vấn đề phát sinh
+
+| Vấn đề | Diễn giải |
+|--------|-----------|
+| **Thanh header chiếm 25% màn hình điện thoại** | Đo thực tế ở 390×780: header cao **194px**. Vì vòng 1 không có nút menu 3 gạch nên vòng 2 chỉ còn cách xếp dọc (`flex-direction: column`) — logo một hàng, 4 link nav xuống hàng, nút CTA một hàng. Header lại đang `position: sticky` nên khối này **dính theo suốt lúc cuộn**, che mất 1/4 màn hình |
+| **Vùng chạm của link nav chỉ cao 18px** | Đo thực tế. Chuẩn tối thiểu của Apple/Google là 44px. Trên điện thoại rất dễ bấm trượt sang link bên cạnh |
+| **CSS phụ thuộc vào cấu trúc DOM, rất dễ vỡ** | Hệ quả trực tiếp của việc vòng 1 không có class nào. Gemini phải viết những bộ chọn như `#bang-gia article:nth-child(2)`, `body > header > a:first-child`, `#hero a[href="#dang-ky"]`, `#bang-gia header p:nth-of-type(1)`. Chỉ cần chèn thêm một thẻ hoặc đổi thứ tự gói giá là style hỏng. Bản Claude dùng class nên không gặp vấn đề này |
+| **Làm vượt phạm vi vòng 2** | Prompt vòng 2 chỉ yêu cầu styling và màu sắc, nhưng Gemini đã tự thêm `clamp()` cho tiêu đề, hiệu ứng hover nhô thẻ, và `transition` — đây vốn là nội dung của vòng 3. Lặp lại đúng xu hướng đã thấy ở vòng 1 |
+| **Hỏi đáp vẫn là danh sách phẳng** | `<dl>` được tạo kiểu cho đẹp nhưng cả 4 câu trả lời đều mở sẵn, không gập lại được. Phần hỏi đáp vì vậy dài lê thê. Bản Claude dùng `<details>` nên gập sẵn từ vòng 1 |
+| **Không có `prefers-reduced-motion`** | Có `transition: all 0.2s ease` áp cho mọi thẻ `<a>` nhưng không có khối tôn trọng thiết lập giảm chuyển động của hệ điều hành |
+
+### Thay đổi thủ công
+
+| Thay đổi | Lý do |
+|----------|-------|
+| Tách CSS ra file `style.css` riêng và thêm thẻ `<link>` vào `index.html` | Gemini hướng dẫn dán CSS vào thẻ `<style>` trong `<head>`. Tách ra file riêng để cấu trúc thư mục giống hệt bản Claude, đối chiếu cho công bằng. Nội dung CSS giữ nguyên 100%, không sửa một dòng nào |
+
+---
 
 ---
 
