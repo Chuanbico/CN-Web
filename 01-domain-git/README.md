@@ -1,124 +1,101 @@
-# Exercise 1 — Tên miền miễn phí & Git/GitHub
+# Exercise 1 — Git & GitHub
 
-## Phần A — Đăng ký tên miền miễn phí
-
-### Tình trạng
-
-> ⚠️ **Chưa thực hiện.** Việc đăng ký tên miền đòi hỏi tạo tài khoản và khai thông tin
-> định danh cá nhân (họ tên, số CCCD, số điện thoại thật) trên trang của nhà đăng ký,
-> nên phải do chính sinh viên làm. Phần dưới là hướng dẫn từng bước và bảng để điền
-> kết quả sau khi đăng ký xong.
-
-### Chương trình tên miền `.id.vn` miễn phí
-
-Theo đề bài, hai nhà đăng ký được gợi ý:
-
-| Nhà đăng ký | Đường dẫn |
-|-------------|-----------|
-| P.A Việt Nam | https://www.pavietnam.vn/vn/tin-tuc-uu-dai-so-huu-mien-phi-ten-mien-id-vn.html |
-| Mắt Bão | https://www.matbao.net/ten-mien/ten-mien-mien-phi.html |
-
-Đây là chương trình của Trung tâm Internet Việt Nam (VNNIC) dành cho người dùng cá
-nhân, đặc biệt là sinh viên — miễn phí năm đầu, sau đó gia hạn có phí.
-
-### Các bước thực hiện
-
-1. **Chọn tên miền.** Kiểm tra tên còn trống trên công cụ tra cứu của nhà đăng ký.
-   Gợi ý đặt theo tên thật để còn dùng lâu dài, ví dụ `truongphuc.id.vn`.
-2. **Tạo tài khoản** trên trang nhà đăng ký bằng email thật.
-3. **Khai thông tin chủ thể.** Tên miền `.id.vn` yêu cầu thông tin định danh cá nhân
-   (họ tên, ngày sinh, số CCCD, địa chỉ, số điện thoại). Khai đúng — sai thông tin
-   thì tên miền có thể bị thu hồi.
-4. **Xác thực** qua email hoặc số điện thoại.
-5. **Chờ duyệt.** Thường trong vòng 24 giờ.
-6. **Trỏ tên miền về trang web.** Với repo này, cách nhanh nhất là bật GitHub Pages
-   rồi trỏ bản ghi DNS về đó (xem phần C).
-
-### Bảng kết quả — điền sau khi đăng ký
-
-| Mục | Nội dung |
-|-----|----------|
-| Tên miền đã đăng ký | `__________.id.vn` |
-| Nhà đăng ký | ☐ P.A Việt Nam ☐ Mắt Bão |
-| Ngày đăng ký | |
-| Ngày hết hạn | |
-| Ảnh chụp màn hình | `screenshots/domain-*.png` |
-
----
-
-## Phần B — Git & GitHub
-
-### Tài liệu đã đọc
+## 1. Tài liệu tham khảo
 
 | Nguồn | Đường dẫn |
 |-------|-----------|
 | CodeLearn — Git & GitHub từ cơ bản đến nâng cao (P1) | https://codelearn.io/sharing/git-github-tu-co-ban-den-nang-cao-p1 |
 | GitHub Docs — About GitHub and Git | https://docs.github.com/en/get-started/start-your-journey/about-github-and-git |
 
-### Tóm tắt những gì cần nắm
+## 2. Git khác GitHub ở chỗ nào?
 
-**Git khác GitHub ở chỗ nào?**
-Git là phần mềm quản lý phiên bản chạy trên máy mình — nó ghi lại lịch sử thay đổi
-của mã nguồn. GitHub là dịch vụ lưu trữ kho Git trên mạng, thêm phần cộng tác
-(pull request, issue, review). Không có GitHub thì Git vẫn chạy bình thường.
+**Git** là phần mềm quản lý phiên bản chạy trên máy của mình, ghi lại lịch sử thay
+đổi của mã nguồn. **GitHub** là dịch vụ lưu trữ kho Git trên mạng, bổ sung phần
+cộng tác (pull request, issue, review). Không có GitHub thì Git vẫn chạy bình thường.
 
-**Ba vùng của Git:**
+## 3. Ba vùng của Git
 
 ```
-Thư mục làm việc  →  Vùng chờ (staging)  →  Kho (repository)
-   (sửa file)          git add                 git commit
+Thư mục làm việc  ──git add──▶  Vùng chờ (staging)  ──git commit──▶  Kho (repository)
+     (sửa file)                                                       │
+                                                                 git push
+                                                                      ▼
+                                                                   GitHub
 ```
 
-**Các lệnh dùng trong bài này:**
+## 4. Các lệnh đã dùng trong bài tập này
 
 | Lệnh | Tác dụng |
 |------|----------|
-| `git init` | Khởi tạo kho Git trong thư mục hiện tại |
+| `git init -b main` | Khởi tạo kho Git, đặt tên nhánh đầu tiên là `main` |
 | `git status` | Xem file nào đã sửa, file nào đang chờ commit |
-| `git add <file>` | Đưa thay đổi vào vùng chờ |
+| `git add -A` | Đưa toàn bộ thay đổi vào vùng chờ |
 | `git commit -m "..."` | Ghi thay đổi thành một mốc lịch sử |
 | `git log --oneline` | Xem lịch sử commit dạng rút gọn |
-| `git branch <tên>` | Tạo nhánh mới |
-| `git switch <tên>` | Chuyển sang nhánh khác |
+| `git switch -c <nhánh> main` | Tạo nhánh mới tách từ `main` và chuyển sang nhánh đó |
+| `git switch <nhánh>` | Chuyển qua lại giữa các nhánh |
+| `git rm -r --cached <thư mục>` | Gỡ thư mục khỏi Git nhưng giữ file trên đĩa |
 | `git remote add origin <url>` | Gắn kho trên máy với kho trên GitHub |
-| `git push -u origin <nhánh>` | Đẩy nhánh lên GitHub lần đầu |
+| `git push -u origin <nhánh>` | Đẩy nhánh lên GitHub lần đầu và ghi nhớ liên kết |
+| `git push -f origin <nhánh>` | Ghi đè nhánh trên GitHub sau khi dựng lại lịch sử |
 
-**Nhánh (branch) để làm gì?**
-Mỗi nhánh là một dòng lịch sử độc lập. Trong bài tập này mỗi bài được đặt trên một
-nhánh riêng để giảng viên xem từng bài mà không bị lẫn, còn nhánh chính gộp cả ba.
+## 5. Cách tổ chức repo
 
-### Cách tổ chức repo của bài tập này
+Mỗi exercise được đặt trên một nhánh riêng, `main` giữ bản gộp đầy đủ:
 
 | Nhánh | Nội dung |
 |-------|----------|
-| `main` | Gộp cả 3 bài: `01-domain-git/`, `02-portfolio-card/`, `03-landing-page/` |
+| `main` | Cả 3 bài: `01-domain-git/`, `02-portfolio-card/`, `03-landing-page/` |
 | `exercise1.1` | Riêng Exercise 1 |
 | `exercise1.2` | Riêng Exercise 2 — Portfolio Card |
 | `exercise1.3` | Riêng Exercise 3 — Landing Page |
 
-Repo: https://github.com/Chuanbico/CN-Web
+**Lý do tách nhánh:** người chấm mở từng bài độc lập mà không bị lẫn nội dung của
+bài khác, còn `main` vẫn xem được toàn bộ.
 
----
+### Quy trình dựng một nhánh riêng cho từng bài
 
-## Phần C — Ghép hai phần lại: đưa trang lên tên miền vừa đăng ký
+```bash
+# 1. Tạo nhánh mới tách từ main
+git switch -c exercise1.2 main
 
-Sau khi có tên miền, có thể cho trang Portfolio Card chạy thật trên đó:
+# 2. Gỡ những thư mục không thuộc bài này
+git rm -r --cached 01-domain-git 03-landing-page docs
+rm -rf 01-domain-git 03-landing-page docs
 
-1. Trong repo GitHub, vào **Settings → Pages**, chọn nhánh `main`, thư mục `/ (root)`.
-   GitHub sẽ cấp địa chỉ dạng `https://chuanbico.github.io/CN-Web/`.
-2. Trong **Settings → Pages → Custom domain**, nhập tên miền đã đăng ký.
-3. Về trang quản lý DNS của nhà đăng ký, thêm bản ghi:
+# 3. Đưa nội dung của bài lên thư mục gốc của nhánh
+cd 02-portfolio-card && mv * .. && cd .. && rmdir 02-portfolio-card
 
-   | Loại | Tên | Giá trị |
-   |------|-----|---------|
-   | CNAME | `www` | `chuanbico.github.io` |
-   | A | `@` | `185.199.108.153` |
-   | A | `@` | `185.199.109.153` |
-   | A | `@` | `185.199.110.153` |
-   | A | `@` | `185.199.111.153` |
+# 4. Ghi lại và đẩy lên GitHub
+git add -A
+git commit -m "Exercise 2: Portfolio Card + nhật ký Vibe coding"
+git push -u origin exercise1.2
 
-4. Chờ DNS cập nhật (vài phút tới vài giờ), sau đó bật **Enforce HTTPS**.
+# 5. Quay về main, dọn sạch thư mục làm việc
+git switch main
+git checkout -- . && git clean -fd
+```
 
-> Bốn địa chỉ IP ở trên là của GitHub Pages. Nên kiểm tra lại tại
-> https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site
-> phòng khi GitHub thay đổi.
+Bước 5 quan trọng: sau khi thao tác xoá/di chuyển file trên nhánh con, thư mục làm
+việc còn sót thay đổi. `git checkout -- .` khôi phục file bị xoá, `git clean -fd`
+dọn file thừa, để `main` trở lại đúng trạng thái đã commit.
+
+## 6. Đưa trang lên GitHub Pages
+
+Repo chỉ gồm HTML/CSS/JS tĩnh nên cho chạy thật được mà không cần máy chủ riêng:
+
+1. Trong repo GitHub, vào **Settings → Pages**.
+2. Ở mục **Source**, chọn nhánh `main`, thư mục `/ (root)`, bấm **Save**.
+3. Sau vài phút GitHub cấp địa chỉ dạng `https://chuanbico.github.io/CN-Web/`.
+4. Bật **Enforce HTTPS** để trang chạy qua kết nối mã hoá.
+
+Khi đó hai trang của bài tập truy cập được tại:
+
+```
+https://chuanbico.github.io/CN-Web/02-portfolio-card/
+https://chuanbico.github.io/CN-Web/03-landing-page/Claude-Opus-5/
+```
+
+## 7. Mã nguồn
+
+https://github.com/Chuanbico/CN-Web

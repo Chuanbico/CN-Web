@@ -9,9 +9,9 @@
 |------|----------|------------|
 | 1 | Khung cấu trúc HTML | Xong |
 | 2 | Styling & màu sắc | Xong |
-| 3 | Chi tiết & polish | Chưa chạy |
+| 3 | Chi tiết & polish | Xong |
 
-Link hội thoại gốc: https://share.gemini.google/QU1K7gfFAIaZ
+Link hội thoại gốc: https://share.gemini.google/rmqF7ZMARH6H
 
 ---
 
@@ -125,4 +125,111 @@ Mobile 390px:
 
 ## VÒNG 3 — Chi tiết & polish
 
-_(Chưa chạy)_
+### Prompt tinh chỉnh
+
+Giống hệt prompt đã gửi Claude (xem [`../PROMPTS.md`](../PROMPTS.md) — Vòng 3).
+
+### Kết quả nhận được
+
+Gemini mở đầu bằng câu *"Dưới đây là mã hoàn chỉnh đã tích hợp cả HTML, CSS tinh
+chỉnh và JavaScript vào một file duy nhất"*, bắt đầu in ra file HTML gộp — nhưng
+**đoạn mã bị đứt giữa chừng** ở khối `:root` rồi chuyển sang một câu trả lời khác
+theo bố cục 4 mục. Phần giao nộp thực tế gồm:
+
+1. Khối biến `clamp()` cho spacing và typography
+2. Khối CSS hiệu ứng (hover, fade-in, LED, vạch quét, HUD, `prefers-reduced-motion`)
+3. File JavaScript xử lý menu, scrollspy, fade-in, kiểm tra biểu mẫu
+4. Một **"Khung HTML mẫu tích hợp"** — trang demo chung chung với các mục
+   `#overview`, `#specs`, `#register` và nội dung *"Tốc độ: 120 km/h",
+   "Áp suất: 2.4 bar", "Nhiệt độ: 42°C"* — **không liên quan gì tới landing page
+   DriveGuard** mà chính nó đã viết ở vòng 1 và 2.
+
+Xét riêng chất lượng từng đoạn thì tốt: `clamp()` có công thức hợp lý, regex số
+điện thoại Việt Nam (`^(03|05|07|08|09)\d{8}$`) chặt hơn của Claude, có
+`aria-current` cho scrollspy, có lọc ký tự không phải số khi người dùng gõ, và có
+khối `prefers-reduced-motion` đầy đủ.
+
+### Vấn đề phát sinh — đo bằng số liệu
+
+Đã dán nguyên văn CSS và JS của vòng 3 vào trang vòng 2 (đúng như một người dùng
+bình thường sẽ làm) rồi mở trình duyệt đo thực tế:
+
+**a) Không một bộ chọn nào khớp: 0/14**
+
+| Bộ chọn Gemini dùng ở vòng 3 | Số phần tử khớp trong `index.html` của chính nó |
+|---|---|
+| `.card` | 0 |
+| `.btn` | 0 |
+| `.reveal-on-scroll` | 0 |
+| `.led-indicator` | 0 |
+| `.device-screen` | 0 |
+| `.hud-panel` | 0 |
+| `.menu-toggle` | 0 |
+| `.nav-menu` | 0 |
+| `.nav-link` | 0 |
+| `#register-form` | 0 |
+| `#full-name` | 0 |
+| `#phone-number` | 0 |
+| `#name-error` | 0 |
+| `#phone-error` | 0 |
+
+Nguyên nhân gốc: **vòng 1 Gemini trả về HTML không có một class nào**, còn vòng 3
+lại viết CSS/JS dựa hoàn toàn vào class. Ô nhập trong biểu mẫu vòng 1 tên là
+`#ho-ten` và `#so-dien-thoai`, thẻ `<form>` không có `id`; vòng 3 lại đi tìm
+`#register-form`, `#full-name`, `#phone-number`.
+
+Hệ quả: **toàn bộ nhóm 3 và nhóm 4 của prompt đều không chạy.** Không có hover
+nhô thẻ, không fade-in, không menu mobile, không scrollspy, không kiểm tra biểu
+mẫu. JavaScript cũng không báo lỗi ra console — nó thoát êm ở dòng
+`if (!form) return;` nên nhìn bề ngoài tưởng như mọi thứ bình thường.
+
+**b) Nhóm 1 và 2 cũng gần như vô hiệu vì thua độ ưu tiên bộ chọn**
+
+Vòng 3 viết `section { padding-block: var(--section-spacing) }` và
+`h1 { font-size: var(--text-h1) }` — bộ chọn theo thẻ. Nhưng vòng 2 đã viết
+`#tinh-nang { padding: 5rem 1.5rem }` và `#hero h1 { font-size: ... }` — bộ chọn
+theo `id`, độ ưu tiên cao hơn hẳn. Đo ở 390×780:
+
+| Thuộc tính | Giá trị vòng 3 muốn đặt | Giá trị thực tế đo được | Kết luận |
+|---|---|---|---|
+| `#tinh-nang` padding dọc | `clamp(3rem, 2rem+5vw, 7rem)` ≈ 68px | **80px** (= 5rem của vòng 2) | Không ăn |
+| `#hero h1` cỡ chữ | `clamp(2.25rem, …, 4.5rem)` | **32px** (= 2rem của vòng 2) | Không ăn |
+| `#tinh-nang h2` cỡ chữ | `clamp(1.75rem, …, 3rem)` | **35.2px** (= 2.2rem của vòng 2) | Không ăn |
+
+**c) Lỗi phân cấp tiêu đề bị đảo ngược trên mobile**
+
+Hệ quả trực tiếp của mục (b): ở 390px, **`h1` cao 32px trong khi `h2` cao 35,2px**
+— tiêu đề chính của trang nhỏ hơn tiêu đề của một mục con. Lỗi này sinh ra từ vòng 2
+(`#tinh-nang h2` đặt cứng `2.2rem`, không có mốc thu nhỏ cho mobile) và vòng 3 đã
+**không sửa được** vì bộ chọn `h2` chung chung thua `#tinh-nang h2`.
+
+**d) Sửa lỗi cho thứ không tồn tại**
+
+Prompt yêu cầu "sửa lỗi bảng HUD bị chật ở màn hình hẹp" — đây là lỗi của **bản
+Claude**, vì chỉ bản Claude mới có ảnh minh hoạ thiết bị kèm bảng HUD. Trang của
+Gemini chưa từng có phần tử nào như vậy. Thay vì nói rõ "trang của bạn không có
+HUD", Gemini vẫn viết ra `.hud-panel`, `.device-screen`, `.led-indicator` và tự
+dựng một trang demo có "Tốc độ / Áp suất / Nhiệt độ" để minh hoạ.
+
+### Kết quả giao diện
+
+Desktop 1280px:
+
+![Vòng 3 — Gemini, desktop](screenshots/round3-desktop.png)
+
+Mobile 390px:
+
+![Vòng 3 — Gemini, mobile](screenshots/round3-mobile.png)
+
+So với vòng 2, giao diện **gần như không đổi** — đúng như đo đạc ở trên.
+
+### Thay đổi thủ công
+
+| Thay đổi | Lý do |
+|----------|-------|
+| Nối CSS vòng 3 vào cuối `style.css`, tạo `script.js`, thêm thẻ `<script>` vào `index.html` | Để chạy thử được đúng kịch bản một người dùng bình thường sẽ làm: dán code AI trả về vào dự án đang có. **Không sửa một dòng nào** trong code của Gemini — mọi thứ giữ nguyên văn để kết quả đo phản ánh đúng chất lượng đầu ra |
+
+> Có thể chữa cho bản Gemini chạy được bằng cách thêm class vào HTML cho khớp với
+> CSS/JS vòng 3. Nhưng làm vậy là **mình viết bài chứ không phải AI**, và sẽ làm
+> hỏng phép so sánh với bản Claude. Vì vậy giữ nguyên hiện trạng và ghi lại đúng
+> những gì đo được.
