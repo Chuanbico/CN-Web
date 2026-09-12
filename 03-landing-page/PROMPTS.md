@@ -1,12 +1,15 @@
 # Bộ prompt chuẩn — dùng chung cho cả 2 công cụ AI
 
 > **Cách dùng:** copy nguyên văn từng prompt bên dưới, gửi lần lượt (vòng 1 → 2 → 3)
-> vào công cụ AI thứ hai (ChatGPT hoặc Gemini) trong **cùng một cuộc hội thoại**.
-> Không thêm, không bớt chữ nào — có giữ nguyên prompt thì phần so sánh mới công bằng.
+> vào công cụ AI trong **cùng một cuộc hội thoại**. Không thêm, không bớt chữ nào —
+> có giữ nguyên prompt thì phần so sánh mới công bằng.
 >
-> Kết quả trả về lưu vào thư mục `03-landing-page/<Tên-công-cụ>/`
-> (ví dụ `03-landing-page/ChatGPT-5/`) gồm `index.html`, `style.css`, `script.js`
-> và ảnh chụp màn hình sau mỗi vòng.
+> Kết quả trả về lưu vào thư mục `03-landing-page/<Tên-công-cụ>/` gồm `index.html`,
+> `style.css`, `script.js` và ảnh chụp màn hình sau mỗi vòng.
+>
+> **Đã chạy trên 2 công cụ:** [`Claude-Opus-5/`](Claude-Opus-5/) và
+> [`Gemini-3.8-Flash/`](Gemini-3.8-Flash/). Kết quả đối chiếu ở
+> [`AI-COMPARISON.md`](AI-COMPARISON.md).
 
 ---
 
@@ -57,13 +60,13 @@ prefers-reduced-motion.
 
 ---
 
-## Sau khi chạy xong, cần ghi lại gì?
+## Sau mỗi vòng, ghi lại gì?
 
-Với **mỗi vòng** của công cụ thứ hai, ghi vào `AI-LOG.md` trong thư mục của công cụ đó:
+Với **mỗi vòng** của mỗi công cụ, ghi vào `AI-LOG.md` trong thư mục của công cụ đó:
 
 - **Kết quả nhận được** — mô tả ngắn công cụ đã sinh ra gì
 - **Kết quả giao diện** — ảnh chụp desktop + mobile
 - **Vấn đề phát sinh** — chỗ nào chưa đúng / chưa đẹp
 - **Thay đổi thủ công** — mình phải tự sửa gì và vì sao
 
-Rồi điền các ô `_(chưa chạy)_` trong [AI-COMPARISON.md](AI-COMPARISON.md).
+Rồi đối chiếu hai bên trong [AI-COMPARISON.md](AI-COMPARISON.md).

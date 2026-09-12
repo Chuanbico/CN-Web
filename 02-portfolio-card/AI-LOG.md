@@ -132,7 +132,7 @@ body {
 
 ### 3.1. Cách kiểm thử
 
-Chạy server tĩnh `python3 -m http.server 8123 --directory Exer1`, mở trong
+Chạy server tĩnh `python3 -m http.server 8123` ngay trong thư mục bài, mở trong
 trình duyệt và đổi kích thước viewport: **360×640 (mobile)** và
 **1280×900 (desktop)**.
 

@@ -5,9 +5,9 @@ Trang giới thiệu cá nhân dạng card, dùng để chia sẻ trên mạng x
 ## Cấu trúc
 
 ```
-Exer1/
+02-portfolio-card/
 ├── index.html                 # Cấu trúc trang
-├── style.css              # Toàn bộ style + responsive
+├── style.css                  # Toàn bộ style + responsive
 ├── assets/avatar.svg          # Ảnh đại diện (monogram SVG)
 ├── AI-LOG.md                  # Nhật ký Vibe Coding (bắt buộc nộp)
 ├── README.md
@@ -19,7 +19,8 @@ Exer1/
 Mở trực tiếp `index.html` bằng trình duyệt, hoặc chạy server tĩnh:
 
 ```bash
-python3 -m http.server 8123 --directory Exer1
+# chạy ngay trong thư mục này
+python3 -m http.server 8123
 # rồi mở http://localhost:8123
 ```
 

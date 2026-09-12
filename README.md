@@ -11,7 +11,7 @@
 |-----|---------|-------|------------|
 | Exercise 1 | [`01-domain-git/`](01-domain-git/) | Tên miền `.id.vn` miễn phí + Git/GitHub | Phần Git xong; phần đăng ký tên miền chờ tự thực hiện |
 | Exercise 2 | [`02-portfolio-card/`](02-portfolio-card/) | Portfolio Card — trang giới thiệu cá nhân | Xong |
-| Exercise 3 | [`03-landing-page/`](03-landing-page/) | Landing page sản phẩm **DriveGuard** | Bản Claude xong; chờ chạy công cụ AI thứ hai |
+| Exercise 3 | [`03-landing-page/`](03-landing-page/) | Landing page sản phẩm **DriveGuard** — chạy cùng bộ prompt trên 2 công cụ AI | Xong |
 
 Đề bài gốc: [`requirement.txt`](requirement.txt) · [`de-bai/`](de-bai/)
 
@@ -30,7 +30,8 @@ Mỗi bài có nhật ký riêng ghi lại đủ 5 mục đề bài yêu cầu
 (prompt ban đầu → kết quả → vấn đề phát sinh → prompt tinh chỉnh → thay đổi thủ công):
 
 - [`02-portfolio-card/AI-LOG.md`](02-portfolio-card/AI-LOG.md)
-- [`03-landing-page/Claude-Opus-5/AI-LOG.md`](03-landing-page/Claude-Opus-5/AI-LOG.md)
+- [`03-landing-page/Claude-Opus-5/AI-LOG.md`](03-landing-page/Claude-Opus-5/AI-LOG.md) — công cụ 1: Claude Opus 5
+- [`03-landing-page/Gemini-3.8-Flash/AI-LOG.md`](03-landing-page/Gemini-3.8-Flash/AI-LOG.md) — công cụ 2: Gemini 3.8 Flash
 - [`03-landing-page/AI-COMPARISON.md`](03-landing-page/AI-COMPARISON.md) — so sánh 2 công cụ AI
 - [`03-landing-page/PROMPTS.md`](03-landing-page/PROMPTS.md) — bộ prompt chuẩn dùng chung
 
@@ -44,4 +45,5 @@ không Google Fonts, không ảnh tải từ internet) nên mở thẳng file l�
 python3 -m http.server 8000
 # rồi mở http://localhost:8000/02-portfolio-card/
 #        http://localhost:8000/03-landing-page/Claude-Opus-5/
+#        http://localhost:8000/03-landing-page/Gemini-3.8-Flash/
 ```
