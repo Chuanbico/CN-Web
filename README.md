@@ -1,49 +1,101 @@
-# Bài tập 1 — HTML, CSS
+# Exercise 1 — Git & GitHub
 
-**Môn:** Công nghệ Web — Trường Công nghệ Thông tin và Truyền thông, ĐHBK Hà Nội
-**Sinh viên:** Nguyen Duc Truong Phuc
+## 1. Tài liệu tham khảo
 
----
+| Nguồn | Đường dẫn |
+|-------|-----------|
+| CodeLearn — Git & GitHub từ cơ bản đến nâng cao (P1) | https://codelearn.io/sharing/git-github-tu-co-ban-den-nang-cao-p1 |
+| GitHub Docs — About GitHub and Git | https://docs.github.com/en/get-started/start-your-journey/about-github-and-git |
 
-## Nội dung
+## 2. Git khác GitHub ở chỗ nào?
 
-| Bài | Thư mục | Mô tả | Trạng thái |
-|-----|---------|-------|------------|
-| Exercise 1 | [`01-domain-git/`](01-domain-git/) | Tên miền `.id.vn` miễn phí + Git/GitHub | Phần Git xong; phần đăng ký tên miền chờ tự thực hiện |
-| Exercise 2 | [`02-portfolio-card/`](02-portfolio-card/) | Portfolio Card — trang giới thiệu cá nhân | Xong |
-| Exercise 3 | [`03-landing-page/`](03-landing-page/) | Landing page sản phẩm **DriveGuard** — chạy cùng bộ prompt trên 2 công cụ AI | Xong |
+**Git** là phần mềm quản lý phiên bản chạy trên máy của mình, ghi lại lịch sử thay
+đổi của mã nguồn. **GitHub** là dịch vụ lưu trữ kho Git trên mạng, bổ sung phần
+cộng tác (pull request, issue, review). Không có GitHub thì Git vẫn chạy bình thường.
 
-Đề bài gốc: [`requirement.txt`](requirement.txt) · [`de-bai/`](de-bai/)
+## 3. Ba vùng của Git
 
-## Nhánh
+```
+Thư mục làm việc  ──git add──▶  Vùng chờ (staging)  ──git commit──▶  Kho (repository)
+     (sửa file)                                                       │
+                                                                 git push
+                                                                      ▼
+                                                                   GitHub
+```
+
+## 4. Các lệnh đã dùng trong bài tập này
+
+| Lệnh | Tác dụng |
+|------|----------|
+| `git init -b main` | Khởi tạo kho Git, đặt tên nhánh đầu tiên là `main` |
+| `git status` | Xem file nào đã sửa, file nào đang chờ commit |
+| `git add -A` | Đưa toàn bộ thay đổi vào vùng chờ |
+| `git commit -m "..."` | Ghi thay đổi thành một mốc lịch sử |
+| `git log --oneline` | Xem lịch sử commit dạng rút gọn |
+| `git switch -c <nhánh> main` | Tạo nhánh mới tách từ `main` và chuyển sang nhánh đó |
+| `git switch <nhánh>` | Chuyển qua lại giữa các nhánh |
+| `git rm -r --cached <thư mục>` | Gỡ thư mục khỏi Git nhưng giữ file trên đĩa |
+| `git remote add origin <url>` | Gắn kho trên máy với kho trên GitHub |
+| `git push -u origin <nhánh>` | Đẩy nhánh lên GitHub lần đầu và ghi nhớ liên kết |
+| `git push -f origin <nhánh>` | Ghi đè nhánh trên GitHub sau khi dựng lại lịch sử |
+
+## 5. Cách tổ chức repo
+
+Mỗi exercise được đặt trên một nhánh riêng, `main` giữ bản gộp đầy đủ:
 
 | Nhánh | Nội dung |
 |-------|----------|
-| `main` | Gộp cả 3 bài |
+| `main` | Cả 3 bài: `01-domain-git/`, `02-portfolio-card/`, `03-landing-page/` |
 | `exercise1.1` | Riêng Exercise 1 |
-| `exercise1.2` | Riêng Exercise 2 |
-| `exercise1.3` | Riêng Exercise 3 |
+| `exercise1.2` | Riêng Exercise 2 — Portfolio Card |
+| `exercise1.3` | Riêng Exercise 3 — Landing Page |
 
-## Nhật ký Vibe Coding
+**Lý do tách nhánh:** người chấm mở từng bài độc lập mà không bị lẫn nội dung của
+bài khác, còn `main` vẫn xem được toàn bộ.
 
-Mỗi bài có nhật ký riêng ghi lại đủ 5 mục đề bài yêu cầu
-(prompt ban đầu → kết quả → vấn đề phát sinh → prompt tinh chỉnh → thay đổi thủ công):
-
-- [`02-portfolio-card/AI-LOG.md`](02-portfolio-card/AI-LOG.md)
-- [`03-landing-page/Claude-Opus-5/AI-LOG.md`](03-landing-page/Claude-Opus-5/AI-LOG.md) — công cụ 1: Claude Opus 5
-- [`03-landing-page/Gemini-3.8-Flash/AI-LOG.md`](03-landing-page/Gemini-3.8-Flash/AI-LOG.md) — công cụ 2: Gemini 3.8 Flash
-- [`03-landing-page/AI-COMPARISON.md`](03-landing-page/AI-COMPARISON.md) — so sánh 2 công cụ AI
-- [`03-landing-page/PROMPTS.md`](03-landing-page/PROMPTS.md) — bộ prompt chuẩn dùng chung
-
-## Chạy thử
-
-Cả hai trang đều là HTML/CSS/JS thuần, **không có phụ thuộc bên ngoài** (không CDN,
-không Google Fonts, không ảnh tải từ internet) nên mở thẳng file là chạy được.
+### Quy trình dựng một nhánh riêng cho từng bài
 
 ```bash
-# hoặc chạy server tĩnh để đường dẫn tương đối hoạt động chuẩn
-python3 -m http.server 8000
-# rồi mở http://localhost:8000/02-portfolio-card/
-#        http://localhost:8000/03-landing-page/Claude-Opus-5/
-#        http://localhost:8000/03-landing-page/Gemini-3.8-Flash/
+# 1. Tạo nhánh mới tách từ main
+git switch -c exercise1.2 main
+
+# 2. Gỡ những thư mục không thuộc bài này
+git rm -r --cached 01-domain-git 03-landing-page docs
+rm -rf 01-domain-git 03-landing-page docs
+
+# 3. Đưa nội dung của bài lên thư mục gốc của nhánh
+cd 02-portfolio-card && mv * .. && cd .. && rmdir 02-portfolio-card
+
+# 4. Ghi lại và đẩy lên GitHub
+git add -A
+git commit -m "Exercise 2: Portfolio Card + nhật ký Vibe coding"
+git push -u origin exercise1.2
+
+# 5. Quay về main, dọn sạch thư mục làm việc
+git switch main
+git checkout -- . && git clean -fd
 ```
+
+Bước 5 quan trọng: sau khi thao tác xoá/di chuyển file trên nhánh con, thư mục làm
+việc còn sót thay đổi. `git checkout -- .` khôi phục file bị xoá, `git clean -fd`
+dọn file thừa, để `main` trở lại đúng trạng thái đã commit.
+
+## 6. Đưa trang lên GitHub Pages
+
+Repo chỉ gồm HTML/CSS/JS tĩnh nên cho chạy thật được mà không cần máy chủ riêng:
+
+1. Trong repo GitHub, vào **Settings → Pages**.
+2. Ở mục **Source**, chọn nhánh `main`, thư mục `/ (root)`, bấm **Save**.
+3. Sau vài phút GitHub cấp địa chỉ dạng `https://chuanbico.github.io/CN-Web/`.
+4. Bật **Enforce HTTPS** để trang chạy qua kết nối mã hoá.
+
+Khi đó hai trang của bài tập truy cập được tại:
+
+```
+https://chuanbico.github.io/CN-Web/02-portfolio-card/
+https://chuanbico.github.io/CN-Web/03-landing-page/Claude-Opus-5/
+```
+
+## 7. Mã nguồn
+
+https://github.com/Chuanbico/CN-Web
